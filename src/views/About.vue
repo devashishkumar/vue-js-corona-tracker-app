@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Blog: <a href="https://ashishkumar.hashnode.dev">https://ashishkumar.hashnode.dev</a> </h1>
   </div>
 </template>
