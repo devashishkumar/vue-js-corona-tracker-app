@@ -1,6 +1,5 @@
 <template>
-  <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
+  <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
   <div class="container">
     <StateInline @openStates="stateOpenMethod($event)" :urlParams="selectedState" :data="serviceData" v-if="defaultPage !== 'state'"></StateInline>
     <div class="data-table" v-if="defaultPage === 'state'">
@@ -28,7 +27,6 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 import StateInline from "./../views/StateInline.vue";
 const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
 
@@ -59,7 +57,7 @@ const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
   },
   methods: {
     stateOpenMethod: function(data: any) {
-      console.log(data, '62');
+      // console.log(data, '62');
       this.defaultPage = 'state';
     },
     openCities: function(data: any) {
