@@ -2,7 +2,8 @@
   <!-- <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
   <div class="container">
-    <div class="data-table">
+    <StateInline @openStates="stateOpenMethod($event)" :urlParams="selectedState" :data="serviceData" v-if="defaultPage !== 'state'"></StateInline>
+    <div class="data-table" v-if="defaultPage === 'state'">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -16,7 +17,7 @@
           <tr v-for="item in coronaData" :key="item.state">
             <td><router-link :to="'/state/' + item.state">{{item.state}}</router-link></td>
             <td>{{item.active}}</td>
-            <td>{{item.confirmed}}</td>
+            <td v-on:click="openCities(item)">{{item.confirmed}}</td>
             <td>{{item.deceased}}</td>
           </tr>
         </tbody>
@@ -28,15 +29,19 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import StateInline from "./../views/StateInline.vue";
 const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
 
 @Options({
   components: {
-    HelloWorld,
+    StateInline
   },
   data() {
     return {
       coronaData: [],
+      defaultPage: 'state',
+      serviceData: {},
+      selectedState: ''
     };
   },
   created() {
@@ -45,7 +50,7 @@ const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
         return response.json();
       })
       .then((data) => {
-        console.log(data, "36");
+        this.serviceData = data;
         this.manipulateServiceData(data);
       })
       .catch((error) => {
@@ -53,6 +58,15 @@ const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
       });
   },
   methods: {
+    stateOpenMethod: function(data: any) {
+      console.log(data, '62');
+      this.defaultPage = 'state';
+    },
+    openCities: function(data: any) {
+      // console.log(data.state, '59');
+      this.selectedState = data.state;
+      this.defaultPage = 'cities';
+    },
     manipulateServiceData: function (data: any) {
       // alert(serviceData)
       const sData: any = [];

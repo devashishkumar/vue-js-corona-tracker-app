@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in coronaData" :key="item.state">
+          <tr v-for="item in coronaData" :key="item.city">
             <td>{{item.city}}</td>
             <td>{{item.active}}</td>
             <td>{{item.confirmed}}</td>
@@ -31,41 +31,41 @@ const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
 
 @Options({
   components: {
-    HelloWorld,
+    HelloWorld
   },
   data() {
     return {
-        loading: false,
+      loading: false,
       urlParams: this.$route.params.id,
-      coronaData: [],
+      coronaData: []
     };
   },
   created() {
-      this.loading = true;
+    this.loading = true;
     fetch(DATA_URL)
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         this.manipulateServiceData(data);
         this.loading = false;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
         this.loading = false;
       });
   },
   methods: {
-    manipulateServiceData: function (data: any) {
+    manipulateServiceData: function(data: any) {
         const citiesData: any = [];
         Object.keys(data[this.urlParams]['districtData']).forEach(e => {
             const currentData = data[this.urlParams]['districtData'][e];
             currentData['city'] = e;
             citiesData.push(currentData);
-        })
-      this.coronaData = citiesData;
-    },
-  },
+        });
+        this.coronaData = citiesData;
+    }
+  }
 })
 export default class State extends Vue {}
 </script>

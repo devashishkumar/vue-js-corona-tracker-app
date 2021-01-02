@@ -23,4 +23,5 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-corona tracker application developed on vue 3.0 using vue cli
+corona tracker application developed on vue 3.0 using vue cli,
+show cities data in a different url as well as in child component
