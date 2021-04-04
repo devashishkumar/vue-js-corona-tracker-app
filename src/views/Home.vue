@@ -1,7 +1,7 @@
 <template>
   <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
   <div class="container">
-    <StateInline @openStates="stateOpenMethod($event)" :urlParams="selectedState" :data="serviceData" v-if="defaultPage !== 'state'"></StateInline>
+    <!-- <StateInline @openStates="stateOpenMethod($event)" :urlParams="selectedState" :data="serviceData" v-if="defaultPage !== 'state'"></StateInline> -->
     <div class="data-table" v-if="defaultPage === 'state'">
       <table class="table table-hover">
         <thead>
@@ -23,10 +23,15 @@
       </table>
     </div>
   </div>
+              <InputText :v-model="value"></InputText>
+              <Button label="Submit"></Button>
+
+
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+
 import StateInline from "./../views/StateInline.vue";
 const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
 
@@ -39,7 +44,8 @@ const DATA_URL = "https://api.covid19india.org/state_district_wise.json";
       coronaData: [],
       defaultPage: 'state',
       serviceData: {},
-      selectedState: ''
+      selectedState: '',
+      value: 'Ashish'
     };
   },
   created() {
